@@ -71,8 +71,12 @@ const jsonLd = {
   name: site.name,
   jobTitle: site.role,
   url: site.url,
+  email: contact.links.find((link) => link.id === "email")?.copyValue,
+  telephone: contact.links.find((link) => link.id === "phone")?.copyValue,
   knowsAbout: ["React", "Next.js", "TypeScript", "Frontend architecture", "UI/UX"],
-  sameAs: contact.links.map((link) => link.href),
+  sameAs: contact.links
+    .filter((link) => link.href.startsWith("http"))
+    .map((link) => link.href),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

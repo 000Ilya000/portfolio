@@ -1,4 +1,4 @@
-import { ArrowUpRight, BriefcaseBusiness, FolderGit2, Mail, Send } from "lucide-react";
+import { ArrowUpRight, FolderGit2, Mail, Phone, Send } from "lucide-react";
 import { GlassButton } from "@/components/glass/GlassButton";
 import { GlassCard } from "@/components/glass/GlassCard";
 import { Section } from "@/components/layout/Section";
@@ -11,9 +11,9 @@ import { type SocialLink } from "@/content/types";
 
 const icons = {
   telegram: Send,
+  phone: Phone,
   email: Mail,
   github: FolderGit2,
-  linkedin: BriefcaseBusiness,
 } as const;
 
 export function Contact() {
@@ -51,16 +51,15 @@ export function Contact() {
 
 function ContactCard({ link }: { link: SocialLink }) {
   const Icon = icons[link.id];
+  const isExternal = link.href.startsWith("http");
 
   return (
     <GlassCard intensity="medium" tone="neutral">
       <div className="flex items-center justify-between gap-3">
         <a
           href={link.href}
-          className="flex min-w-0 items-center gap-3 text-white hover:text-accent"
-          {...(link.href.startsWith("http")
-            ? { target: "_blank", rel: "noreferrer noopener" }
-            : {})}
+          className="flex min-w-0 cursor-pointer items-center gap-3 text-white hover:text-accent"
+          {...(isExternal ? { target: "_blank", rel: "noreferrer noopener" } : {})}
         >
           <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10">
             <Icon size={18} aria-hidden="true" />

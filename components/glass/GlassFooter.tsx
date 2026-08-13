@@ -2,7 +2,6 @@
 
 import { type ReactNode } from "react";
 import { LiquidGlass } from "@/components/glass/LiquidGlass";
-import { usePointerGlow } from "@/components/glass/usePointerGlow";
 import { cn } from "@/lib/cn";
 
 interface GlassFooterProps {
@@ -11,17 +10,15 @@ interface GlassFooterProps {
 }
 
 export function GlassFooter({ children, className }: GlassFooterProps) {
-  const glow = usePointerGlow();
-
   return (
     <LiquidGlass
       intensity="strong"
       tone="accent"
       radius="3xl"
-      interactive
+      interactive={false}
+      pressable={false}
       padded
       className={cn("glass-footer", className)}
-      {...glow}
     >
       {children}
     </LiquidGlass>

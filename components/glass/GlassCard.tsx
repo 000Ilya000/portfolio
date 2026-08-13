@@ -10,7 +10,8 @@ interface GlassCardProps {
   className?: string;
   intensity?: GlassIntensity;
   tone?: GlassTone;
-  interactive?: boolean;
+  /** Pointer highlight only. Cards are never buttons. */
+  glow?: boolean;
 }
 
 export function GlassCard({
@@ -18,19 +19,20 @@ export function GlassCard({
   className,
   intensity = "medium",
   tone = "neutral",
-  interactive = true,
+  glow = false,
 }: GlassCardProps) {
-  const glow = usePointerGlow();
+  const pointerGlow = usePointerGlow();
 
   return (
     <LiquidGlass
       intensity={intensity}
       tone={tone}
       radius="3xl"
-      interactive={interactive}
+      interactive={glow}
+      pressable={false}
       padded
       className={cn("h-full", className)}
-      {...(interactive ? glow : {})}
+      {...(glow ? pointerGlow : {})}
     >
       {children}
     </LiquidGlass>

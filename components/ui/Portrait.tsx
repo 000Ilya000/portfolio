@@ -12,7 +12,7 @@ export function Portrait({ className }: { className?: string }) {
         height={site.portrait.height}
         priority
         sizes="(max-width: 768px) 86vw, 420px"
-        className="h-full w-full object-cover"
+        className="h-full w-full object-cover object-[50%_18%]"
       />
       <div
         className="pointer-events-none absolute inset-0 bg-linear-to-t from-void/70 via-transparent to-white/10"

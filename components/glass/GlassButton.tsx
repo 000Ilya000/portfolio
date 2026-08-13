@@ -53,6 +53,7 @@ export function GlassButton({
         tone={tone}
         radius="full"
         interactive
+        pressable
         className={classes}
         {...glow}
       >
@@ -64,11 +65,12 @@ export function GlassButton({
 
   if (href) {
     const isHash = href.startsWith("#");
+    const isLocal = isHash || href.startsWith("mailto:") || href.startsWith("tel:");
     return (
       <Link
         href={href}
-        className="inline-flex"
-        {...(isHash ? {} : { target: "_blank", rel: "noreferrer noopener" })}
+        className="inline-flex cursor-pointer"
+        {...(isLocal ? {} : { target: "_blank", rel: "noreferrer noopener" })}
       >
         {node}
       </Link>
@@ -76,7 +78,7 @@ export function GlassButton({
   }
 
   return (
-    <button type={type} onClick={onClick} className="inline-flex">
+    <button type={type} onClick={onClick} className="inline-flex cursor-pointer">
       {node}
     </button>
   );

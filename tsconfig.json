@@ -29,8 +29,7 @@
       "@/*": [
         "./*"
       ]
-    },
-    "strict": false
+    }
   },
   "include": [
     "next-env.d.ts",
