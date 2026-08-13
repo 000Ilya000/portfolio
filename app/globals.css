@@ -386,6 +386,10 @@ body {
   cursor: pointer;
 }
 
+.liquid-glass--pressable {
+  cursor: pointer;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .liquid-glass--interactive:hover:not(.liquid-glass--solid),
   .bento .liquid-glass:hover {
