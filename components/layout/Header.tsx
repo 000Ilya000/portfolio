@@ -82,7 +82,7 @@ export function Header() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
-      <div className="pointer-events-auto mx-auto flex max-w-6xl justify-center">
+      <div className="pointer-events-auto mx-auto flex w-full max-w-6xl justify-center">
         <GlassNavigation compact={compact}>
           <Link
             href="#top"

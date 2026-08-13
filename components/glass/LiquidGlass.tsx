@@ -25,6 +25,14 @@ const radiusClass: Record<GlassRadius, string> = {
   full: "rounded-full",
 };
 
+const radiusToken: Record<GlassRadius, string> = {
+  lg: "1.15rem",
+  xl: "1.5rem",
+  "2xl": "1.85rem",
+  "3xl": "2.25rem",
+  full: "999px",
+};
+
 export interface LiquidGlassProps extends HTMLAttributes<HTMLDivElement> {
   intensity?: GlassIntensity;
   tone?: GlassTone;
@@ -68,6 +76,7 @@ export function LiquidGlass({
         {
           "--glow-x": "50%",
           "--glow-y": "8%",
+          "--glass-radius": radiusToken[radius],
           ...style,
         } as CSSProperties
       }

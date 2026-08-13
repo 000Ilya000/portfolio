@@ -30,7 +30,7 @@ export function GlassCard({
       interactive={false}
       pressable={false}
       padded
-      className={cn("h-full", className)}
+      className={cn("h-full min-w-0", className)}
       {...(sheen ? pointerGlow : {})}
     >
       {children}

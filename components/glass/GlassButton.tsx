@@ -62,7 +62,13 @@ export function GlassButton({
       </LiquidGlass>
     );
 
-  const node = magnetic ? <Magnetic strength={10}>{inner}</Magnetic> : inner;
+  const node = magnetic ? (
+    <Magnetic strength={10} className="inline-flex max-w-full rounded-full">
+      {inner}
+    </Magnetic>
+  ) : (
+    inner
+  );
 
   if (href) {
     const isHash = href.startsWith("#");
@@ -71,7 +77,7 @@ export function GlassButton({
       <Link
         href={href}
         onClick={onClick}
-        className="inline-flex cursor-pointer"
+        className="inline-flex max-w-full rounded-full cursor-pointer"
         {...(isLocal ? {} : { target: "_blank", rel: "noreferrer noopener" })}
       >
         {node}
@@ -80,7 +86,7 @@ export function GlassButton({
   }
 
   return (
-    <button type={type} onClick={onClick} className="inline-flex cursor-pointer">
+    <button type={type} onClick={onClick} className="inline-flex max-w-full cursor-pointer rounded-full">
       {node}
     </button>
   );

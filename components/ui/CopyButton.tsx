@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { Copy } from "lucide-react";
 import { contact } from "@/content/contacts";
 import { cn } from "@/lib/cn";
 
@@ -33,7 +34,7 @@ export function CopyButton({
       <button
         type="button"
         className={cn(
-          "inline-flex min-h-11 cursor-pointer items-center rounded-full px-3 text-sm text-muted transition-colors hover:text-white",
+          "inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center rounded-full px-2 text-sm text-muted transition-colors hover:text-white sm:min-w-0 sm:px-3",
           className,
         )}
         onClick={async () => {
@@ -44,9 +45,11 @@ export function CopyButton({
             setCopied(false);
           }
         }}
+        aria-label={copied ? copiedLabel : label}
         aria-describedby={liveId}
       >
-        {copied ? copiedLabel : label}
+        <Copy size={16} className="sm:hidden" aria-hidden="true" />
+        <span className="hidden sm:inline">{copied ? copiedLabel : label}</span>
       </button>
       <span id={liveId} className="sr-only" aria-live="polite">
         {copied ? `${copiedLabel}: ${value}` : ""}

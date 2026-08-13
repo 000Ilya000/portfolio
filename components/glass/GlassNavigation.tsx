@@ -20,7 +20,7 @@ export function GlassNavigation({ children, className, compact = false }: GlassN
       tone="neutral"
       radius="full"
       className={cn(
-        "glass-nav w-full max-w-5xl",
+        "glass-nav w-full max-w-5xl min-w-0 overflow-hidden",
         compact ? "glass-nav--compact" : "glass-nav--regular",
         className,
       )}

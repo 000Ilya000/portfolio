@@ -2,7 +2,9 @@
 
 import { m, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { type ReactNode } from "react";
+import { useMediaQuery } from "@/lib/media";
 import { spring } from "@/lib/motion";
+import { cn } from "@/lib/cn";
 
 interface MagneticProps {
   children: ReactNode;
@@ -12,18 +14,20 @@ interface MagneticProps {
 
 export function Magnetic({ children, strength = 12, className }: MagneticProps) {
   const reduce = useReducedMotion();
+  const finePointer = useMediaQuery("(hover: hover) and (pointer: fine)");
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, spring);
   const springY = useSpring(y, spring);
+  const classNames = cn("inline-flex max-w-full", className);
 
-  if (reduce) {
-    return <div className={className}>{children}</div>;
+  if (reduce || !finePointer) {
+    return <div className={classNames}>{children}</div>;
   }
 
   return (
     <m.div
-      className={className}
+      className={classNames}
       style={{ x: springX, y: springY }}
       onPointerMove={(event) => {
         if (event.pointerType !== "mouse") {

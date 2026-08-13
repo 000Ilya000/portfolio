@@ -251,6 +251,9 @@ body {
   position: relative;
   isolation: isolate;
   overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
+  border-radius: var(--glass-radius, 1.85rem);
   background: rgba(12, 16, 26, 0.62);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
@@ -273,6 +276,8 @@ body {
   pointer-events: none;
   position: absolute;
   inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
 }
 
 .liquid-glass__fill {
@@ -346,7 +351,7 @@ body {
 }
 
 .liquid-glass--padded .liquid-glass__content {
-  padding: 1.35rem;
+  padding: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -501,7 +506,8 @@ button .liquid-glass--pressable {
 .glass-button .liquid-glass__content {
   display: inline-flex;
   min-height: 3rem;
-  min-width: 3rem;
+  min-width: 0;
+  max-width: 100%;
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
@@ -705,8 +711,11 @@ button .liquid-glass--pressable {
 .hero__actions {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.7rem;
   margin-top: 1.25rem;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .hero__meta {
@@ -733,16 +742,72 @@ button .liquid-glass--pressable {
   color: var(--mist);
 }
 
+.hero-slider {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.hero-slider__track {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0.25rem;
+  padding-bottom: 0.35rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.hero-slider__track::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-slider__slide {
+  flex: 0 0 84%;
+  min-width: 0;
+  scroll-snap-align: center;
+}
+
+.hero-slider__frame {
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border-radius: 1.5rem;
+  background: transparent;
+  clip-path: inset(0 round 1.5rem);
+}
+
+.hero-slider__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-slider__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+}
+
+.hero-slider__dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.hero-slider__dot--active {
+  width: 1.15rem;
+  background: var(--accent);
+}
+
 .hero-collage {
-  position: relative;
-  isolation: isolate;
-  overflow-x: clip;
-  display: grid;
-  grid-template-columns: 1.15fr 0.9fr;
-  grid-template-rows: minmax(7.2rem, 22vw) minmax(9.5rem, 30vw);
-  gap: 0.55rem;
-  min-height: 16.5rem;
-  padding-bottom: 2.25rem;
+  display: none;
 }
 
 .hero-collage__item {
@@ -754,24 +819,12 @@ button .liquid-glass--pressable {
   overflow: hidden;
   height: 100%;
   border-radius: 1.35rem;
+  clip-path: inset(0 round 1.35rem);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
 }
 
 .hero-collage__item--1 {
   grid-column: 1 / -1;
-}
-
-.hero-collage__item--4 {
-  position: absolute;
-  right: 6%;
-  bottom: 0;
-  width: 36%;
-  aspect-ratio: 3 / 4;
-  z-index: 2;
-}
-
-.hero-collage__item--4 .hero-collage__frame {
-  transform: rotate(5deg);
 }
 
 .hero-collage__image {
@@ -893,7 +946,15 @@ button .liquid-glass--pressable {
     line-height: 1.45;
   }
 
+  .hero-slider {
+    display: none;
+  }
+
   .hero-collage {
+    display: grid;
+    position: relative;
+    isolation: isolate;
+    overflow-x: clip;
     min-height: 34rem;
     padding-bottom: 0;
     grid-template-columns: 1.05fr 0.7fr 0.85fr;
@@ -929,11 +990,6 @@ button .liquid-glass--pressable {
   }
 
   .hero-collage__item--4 {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: auto;
-    aspect-ratio: auto;
     grid-column: 2;
     grid-row: 2;
   }
@@ -943,9 +999,48 @@ button .liquid-glass--pressable {
   }
 }
 
-@media (max-width: 767px) {
-  .liquid-glass__refract {
-    opacity: 0.22;
+@media (max-width: 1023px), (hover: none) {
+  .liquid-glass:not(.liquid-glass--solid) {
+    isolation: auto;
+    transform: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    background: rgba(20, 26, 38, 0.94);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 8px 20px rgba(0, 0, 0, 0.28);
+    clip-path: inset(0 round var(--glass-radius, 1.85rem));
+  }
+
+  .liquid-glass--solid {
+    clip-path: inset(0 round var(--glass-radius, 999px));
+  }
+
+  .liquid-glass__fill,
+  .liquid-glass__filter,
+  .liquid-glass__refract,
+  .glass-nav > .liquid-glass__fill,
+  .glass-nav > .liquid-glass__filter,
+  .glass-nav > .liquid-glass__refract {
+    display: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .liquid-glass__specular {
+    opacity: 0.28;
+  }
+
+  .glass-nav {
+    max-width: 100%;
+    background: rgba(20, 26, 38, 0.94);
+  }
+
+  .glass-button .liquid-glass__content,
+  .glass-button--primary .liquid-glass__content {
+    padding-inline: 1rem;
+    white-space: nowrap;
   }
 
   .site-atmosphere__cursor {
