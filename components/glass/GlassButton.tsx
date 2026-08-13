@@ -42,24 +42,24 @@ export function GlassButton({
   type = "button",
 }: GlassButtonProps) {
   const glow = usePointerGlow();
-  const classes = cn(variantClass[variant], className);
+  const classes = cn(variantClass[variant], "icon-live-host", className);
 
   const inner =
-    variant === "ghost" ? (
-      <span className={classes}>{children}</span>
-    ) : (
+    variant === "primary" ? (
       <LiquidGlass
         intensity={intensity}
         tone={tone}
         radius="full"
         interactive
         pressable
-        solid={variant === "primary"}
+        solid
         className={classes}
         {...glow}
       >
         {children}
       </LiquidGlass>
+    ) : (
+      <span className={classes}>{children}</span>
     );
 
   const node = magnetic ? (

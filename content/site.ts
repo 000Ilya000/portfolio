@@ -69,9 +69,9 @@ export const site: SiteConfig = {
   nav: [
     { href: "#about", label: "Обо мне" },
     { href: "#expertise", label: "Экспертиза" },
+    { href: "#stack", label: "Стек" },
     { href: "#projects", label: "Проекты" },
     { href: "#process", label: "Процесс" },
-    { href: "#stack", label: "Стек" },
     { href: "#contact", label: "Контакты" },
   ],
 };

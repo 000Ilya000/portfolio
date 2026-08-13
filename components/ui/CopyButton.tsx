@@ -34,7 +34,7 @@ export function CopyButton({
       <button
         type="button"
         className={cn(
-          "inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center rounded-full px-2 text-sm text-muted transition-colors hover:text-white sm:min-w-0 sm:px-3",
+          "icon-live-host inline-flex min-h-11 min-w-11 shrink-0 cursor-pointer items-center justify-center rounded-full px-2 text-sm text-muted transition-colors hover:text-white sm:min-w-0 sm:px-3",
           className,
         )}
         onClick={async () => {

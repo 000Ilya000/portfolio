@@ -63,7 +63,7 @@ function ContactCard({ link }: { link: SocialLink }) {
           className="flex min-w-0 flex-1 cursor-pointer items-center gap-3 text-white hover:text-accent"
           {...(isExternal ? { target: "_blank", rel: "noreferrer noopener" } : {})}
         >
-          <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 sm:h-11 sm:w-11">
+          <span className="icon-live inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 sm:h-11 sm:w-11">
             <Icon size={18} aria-hidden="true" />
           </span>
           <span className="min-w-0">

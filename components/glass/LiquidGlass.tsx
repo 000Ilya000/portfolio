@@ -82,12 +82,6 @@ export function LiquidGlass({
       }
       {...props}
     >
-      <span className="liquid-glass__fill" aria-hidden="true" />
-      <span className="liquid-glass__filter" aria-hidden="true" />
-      <span className="liquid-glass__refract" aria-hidden="true" />
-      <span className="liquid-glass__tint" aria-hidden="true" />
-      <span className="liquid-glass__specular" aria-hidden="true" />
-      <span className="liquid-glass__edge" aria-hidden="true" />
       <div className="liquid-glass__content">{children}</div>
     </div>
   );

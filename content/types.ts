@@ -162,10 +162,36 @@ export interface StackGroup {
   items: string[];
 }
 
+export type StackLogoId =
+  | "react"
+  | "next"
+  | "typescript"
+  | "javascript"
+  | "tailwind"
+  | "vite"
+  | "query"
+  | "framer"
+  | "vitest"
+  | "git"
+  | "playwright";
+
+export interface StackNode {
+  id: StackLogoId;
+  label: string;
+  caption: string;
+  color: string;
+  x: number;
+  y: number;
+  tip: "top" | "bottom" | "left" | "right";
+}
+
 export interface StackContent {
   eyebrow: string;
   title: string;
   lead: string;
+  hubCaption: string;
+  nodes: StackNode[];
+  extras: string[];
   groups: StackGroup[];
 }
 

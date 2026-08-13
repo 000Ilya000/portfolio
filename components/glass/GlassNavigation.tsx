@@ -1,8 +1,5 @@
-"use client";
-
 import { type ReactNode } from "react";
 import { LiquidGlass } from "@/components/glass/LiquidGlass";
-import { usePointerGlow } from "@/components/glass/usePointerGlow";
 import { cn } from "@/lib/cn";
 
 interface GlassNavigationProps {
@@ -12,8 +9,6 @@ interface GlassNavigationProps {
 }
 
 export function GlassNavigation({ children, className, compact = false }: GlassNavigationProps) {
-  const glow = usePointerGlow();
-
   return (
     <LiquidGlass
       intensity="strong"
@@ -24,7 +19,6 @@ export function GlassNavigation({ children, className, compact = false }: GlassN
         compact ? "glass-nav--compact" : "glass-nav--regular",
         className,
       )}
-      {...glow}
     >
       {children}
     </LiquidGlass>

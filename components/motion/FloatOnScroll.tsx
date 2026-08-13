@@ -32,12 +32,12 @@ export function FloatOnScroll({
     return () => media.removeEventListener("change", sync);
   }, []);
 
-  if (reduce || !enabled) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
-    <m.div ref={ref} className={cn("will-change-transform", className)} style={{ y }}>
+    <m.div
+      ref={ref}
+      className={cn(enabled && !reduce && "will-change-transform", className)}
+      style={enabled && !reduce ? { y } : undefined}
+    >
       {children}
     </m.div>
   );

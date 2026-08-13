@@ -1,28 +1,19 @@
 export const glassTokens = {
   blur: {
     subtle: "16px",
-    medium: "28px",
-    strong: "40px",
+    medium: "24px",
+    strong: "32px",
   },
-  saturate: "180%",
-  brightness: "1.06",
-  opacity: {
-    subtle: 0.1,
-    medium: 0.16,
-    strong: 0.22,
-  },
-  fill: {
-    subtle: 0.28,
-    medium: 0.42,
-    strong: 0.58,
-    nav: 0.72,
-  },
+  saturate: "1.55",
+  fill: "rgba(16, 22, 34, 0.66)",
+  line: "rgba(255, 255, 255, 0.28)",
+  noise: 0.09,
   highlight: "rgba(255, 255, 255, 0.5)",
   edge: "rgba(255, 255, 255, 0.28)",
   tint: {
-    neutral: "rgba(148, 176, 206, 0.22)",
-    accent: "rgba(62, 239, 200, 0.22)",
-    warm: "rgba(228, 199, 165, 0.2)",
+    neutral: "rgba(255, 255, 255, 0.16)",
+    accent: "rgba(62, 239, 200, 0.16)",
+    warm: "rgba(228, 199, 165, 0.16)",
   },
   motion: {
     hoverScale: 1.012,

@@ -18,7 +18,7 @@ export function GlassCard({
   className,
   intensity = "medium",
   tone = "neutral",
-  sheen = true,
+  sheen = false,
 }: GlassCardProps) {
   const pointerGlow = usePointerGlow();
 
@@ -30,7 +30,7 @@ export function GlassCard({
       interactive={false}
       pressable={false}
       padded
-      className={cn("h-full min-w-0", className)}
+      className={cn("icon-live-host h-full min-w-0", className)}
       {...(sheen ? pointerGlow : {})}
     >
       {children}
