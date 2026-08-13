@@ -1,37 +1,46 @@
 import { GlassCard } from "@/components/glass/GlassCard";
 import { Section } from "@/components/layout/Section";
+import { FloatOnScroll } from "@/components/motion/FloatOnScroll";
 import { Reveal } from "@/components/motion/Reveal";
-import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { about } from "@/content/about";
+
+const mosaic = [...about.principles, ...about.highlights];
 
 export function About() {
   return (
     <Section id="about">
       <Reveal>
         <SectionHeading eyebrow={about.eyebrow} title={about.title} lead={about.lead} />
-      </Reveal>
-      <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,0.8fr)]">
-        <Reveal delay={0.08}>
-          <div className="space-y-5 text-base leading-7 text-muted sm:text-lg sm:leading-8">
+        {about.paragraphs.length > 0 ? (
+          <div className="about-layout__copy">
             {about.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-        </Reveal>
-        <Stagger className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-          {about.principles.map((principle, index) => (
-            <StaggerItem key={principle.title}>
-              <GlassCard intensity={index % 2 === 0 ? "medium" : "subtle"} tone="neutral">
+        ) : null}
+      </Reveal>
+      <div className="bento about-bento">
+        {mosaic.map((item, index) => (
+          <FloatOnScroll
+            key={item.title}
+            amount={14 + (index % 3) * 4}
+            className="h-full"
+          >
+            <Reveal delay={index * 0.04} y={14} className="h-full">
+              <GlassCard
+                intensity={index === 0 ? "strong" : "medium"}
+                tone={index === 0 || index === 4 ? "accent" : "neutral"}
+              >
                 <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-                  0{index + 1}
+                  {String(index + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-3 text-lg text-white">{principle.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{principle.text}</p>
+                <h3 className="mt-3 text-lg text-white sm:text-xl">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-mist">{item.text}</p>
               </GlassCard>
-            </StaggerItem>
-          ))}
-        </Stagger>
+            </Reveal>
+          </FloatOnScroll>
+        ))}
       </div>
     </Section>
   );

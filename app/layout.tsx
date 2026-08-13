@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono, Manrope, Unbounded } from "next/font/google";
 import { GlassFilters } from "@/components/glass/GlassFilters";
-import { ScrollProgress } from "@/components/layout/ScrollProgress";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { site } from "@/content/site";
@@ -85,15 +85,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang={site.language}
       className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="relative min-h-full bg-void font-sans text-mist">
+      <body className="relative min-h-full font-sans text-mist">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <GlassFilters />
+        <SiteChrome />
         <SkipLink />
         <MotionProvider>
-          <ScrollProgress />
           {children}
         </MotionProvider>
         <div className="grain" aria-hidden="true" />

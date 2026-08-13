@@ -1,6 +1,5 @@
 import type { HeroContent, SiteConfig } from "./types";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+import { assetPath } from "@/lib/assets";
 
 export const site: SiteConfig = {
   name: "Курымшин Илья",
@@ -28,11 +27,45 @@ export const site: SiteConfig = {
     label: "Открыт к интересным проектам и предложениям",
   },
   portrait: {
-    src: `${basePath}/images/portrait.png`,
-    alt: "Курымшин Илья, Senior React / Frontend Developer",
-    width: 336,
-    height: 336,
+    src: assetPath("/images/hero/closeup.jpg"),
+    alt: "Портрет Курымшина Ильи",
+    width: 1511,
+    height: 2000,
   },
+  photos: [
+    {
+      id: "city",
+      src: assetPath("/images/hero/city.jpg"),
+      alt: "Курымшин Илья на вечерней набережной на фоне городского горизонта",
+      width: 2000,
+      height: 1500,
+      objectPosition: "50% 42%",
+    },
+    {
+      id: "closeup",
+      src: assetPath("/images/hero/closeup.jpg"),
+      alt: "Портрет Курымшина Ильи крупным планом",
+      width: 1511,
+      height: 2000,
+      objectPosition: "50% 22%",
+    },
+    {
+      id: "bar",
+      src: assetPath("/images/hero/bar.jpg"),
+      alt: "Курымшин Илья в вечернем интерьере с видом на город",
+      width: 2000,
+      height: 1500,
+      objectPosition: "62% 28%",
+    },
+    {
+      id: "full",
+      src: assetPath("/images/hero/full.jpg"),
+      alt: "Курымшин Илья в полный рост на городской площади вечером",
+      width: 1500,
+      height: 2000,
+      objectPosition: "50% 18%",
+    },
+  ],
   nav: [
     { href: "#about", label: "Обо мне" },
     { href: "#expertise", label: "Экспертиза" },

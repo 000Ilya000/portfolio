@@ -11,6 +11,7 @@ export type {
   ExpertiseContent,
   ExpertiseIcon,
   HeroContent,
+  HeroPhoto,
   ProcessContent,
   Project,
   ProjectsContent,

@@ -20,7 +20,7 @@ interface SharedProps {
 
 type GlassButtonProps = SharedProps &
   (
-    | { href: string; onClick?: never; type?: never }
+    | { href: string; onClick?: () => void; type?: never }
     | { href?: never; onClick?: () => void; type?: "button" | "submit" }
   );
 
@@ -54,6 +54,7 @@ export function GlassButton({
         radius="full"
         interactive
         pressable
+        solid={variant === "primary"}
         className={classes}
         {...glow}
       >
@@ -69,6 +70,7 @@ export function GlassButton({
     return (
       <Link
         href={href}
+        onClick={onClick}
         className="inline-flex cursor-pointer"
         {...(isLocal ? {} : { target: "_blank", rel: "noreferrer noopener" })}
       >

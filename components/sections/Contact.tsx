@@ -2,6 +2,7 @@ import { ArrowUpRight, FolderGit2, Mail, Phone, Send } from "lucide-react";
 import { GlassButton } from "@/components/glass/GlassButton";
 import { GlassCard } from "@/components/glass/GlassCard";
 import { Section } from "@/components/layout/Section";
+import { FloatOnScroll } from "@/components/motion/FloatOnScroll";
 import { Reveal } from "@/components/motion/Reveal";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -24,25 +25,29 @@ export function Contact() {
       <Reveal>
         <SectionHeading eyebrow={contact.eyebrow} title={contact.title} lead={contact.lead} />
       </Reveal>
-      <Reveal delay={0.1} className="mt-10">
-        <GlassCard intensity="strong" tone="accent">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-xl">
-              <StatusBadge />
-              <p className="mt-5 text-lg leading-8 text-mist">{contact.nextStep}</p>
+      <FloatOnScroll amount={16} className="mt-10">
+        <Reveal delay={0.1}>
+          <GlassCard intensity="strong" tone="accent">
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+              <div className="max-w-xl">
+                <StatusBadge />
+                <p className="mt-5 text-lg leading-8 text-mist">{contact.nextStep}</p>
+              </div>
+              {telegram ? (
+                <GlassButton href={telegram.href} variant="primary" intensity="strong">
+                  {contact.cta}
+                  <ArrowUpRight size={18} aria-hidden="true" />
+                </GlassButton>
+              ) : null}
             </div>
-            {telegram ? (
-              <GlassButton href={telegram.href} variant="primary" intensity="strong">
-                {contact.cta}
-                <ArrowUpRight size={18} aria-hidden="true" />
-              </GlassButton>
-            ) : null}
-          </div>
-        </GlassCard>
-      </Reveal>
+          </GlassCard>
+        </Reveal>
+      </FloatOnScroll>
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        {contact.links.map((link) => (
-          <ContactCard key={link.id} link={link} />
+        {contact.links.map((link, index) => (
+          <FloatOnScroll key={link.id} amount={10 + (index % 2) * 6}>
+            <ContactCard link={link} />
+          </FloatOnScroll>
         ))}
       </div>
     </Section>

@@ -18,8 +18,8 @@ export function Reveal({ children, className, delay = 0, y = 28 }: RevealProps) 
   return (
     <m.div
       className={cn(className)}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduce ? false : { opacity: 0, y, scale: 0.985 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-12% 0px" }}
       transition={{ ...revealEase, delay }}
     >

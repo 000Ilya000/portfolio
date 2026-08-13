@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <main id="content">
+      <main id="content" className="relative z-[1]">
         <Hero />
         <About />
         <Expertise />

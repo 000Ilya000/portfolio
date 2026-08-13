@@ -36,8 +36,8 @@ export function Projects() {
                 </div>
               </Reveal>
               <div className="grid gap-4">
-                {items.map((item, index) => (
-                  <ProjectCard key={item.id} project={item} featured={index === 0} />
+                {items.map((item) => (
+                  <ProjectCard key={item.id} project={item} />
                 ))}
               </div>
             </div>
@@ -48,14 +48,11 @@ export function Projects() {
   );
 }
 
-function ProjectCard({ project, featured }: { project: Project; featured: boolean }) {
+function ProjectCard({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <GlassCard
-      intensity={featured ? "strong" : "medium"}
-      tone={project.kind === "b2b" ? "accent" : "warm"}
-    >
+    <GlassCard intensity="medium" tone={project.kind === "b2b" ? "accent" : "warm"}>
       <article>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-2xl">
@@ -65,12 +62,12 @@ function ProjectCard({ project, featured }: { project: Project; featured: boolea
             <h4 className="mt-3 font-display text-2xl tracking-tight text-white sm:text-3xl">
               {project.title}
             </h4>
-            <p className="mt-3 text-base leading-7 text-muted">{project.subtitle}</p>
+            <p className="mt-3 text-base leading-7 text-mist">{project.subtitle}</p>
             <ul className="mt-4 flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <li
                   key={tag}
-                  className="rounded-full border border-white/10 px-3 py-1 text-xs text-mist"
+                  className="rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs text-white"
                 >
                   {tag}
                 </li>
@@ -100,7 +97,7 @@ function ProjectCard({ project, featured }: { project: Project; featured: boolea
             <CaseField label="Ценность" value={project.value} className="md:col-span-2" />
           </dl>
         ) : (
-          <p className="mt-6 max-w-3xl text-sm leading-6 text-muted">{project.context}</p>
+          <p className="mt-6 max-w-3xl text-sm leading-6 text-mist">{project.context}</p>
         )}
       </article>
     </GlassCard>

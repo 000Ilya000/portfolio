@@ -34,6 +34,7 @@ export interface LiquidGlassProps extends HTMLAttributes<HTMLDivElement> {
   /** Hover lift, active press and pointer cursor. Use only on real controls. */
   pressable?: boolean;
   padded?: boolean;
+  solid?: boolean;
   children: ReactNode;
 }
 
@@ -44,6 +45,7 @@ export function LiquidGlass({
   interactive = false,
   pressable = false,
   padded = false,
+  solid = false,
   className,
   children,
   style,
@@ -59,6 +61,7 @@ export function LiquidGlass({
         interactive && "liquid-glass--interactive",
         pressable && "liquid-glass--pressable",
         padded && "liquid-glass--padded",
+        solid && "liquid-glass--solid",
         className,
       )}
       style={

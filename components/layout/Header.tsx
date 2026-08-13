@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { GlassButton } from "@/components/glass/GlassButton";
 import { GlassNavigation } from "@/components/glass/GlassNavigation";
@@ -15,6 +15,7 @@ export function Header() {
   const [compact, setCompact] = useState(false);
   const [active, setActive] = useState("");
   const menuId = useId();
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 24);
@@ -38,7 +39,7 @@ export function Header() {
           setActive(`#${id}`);
         }
       },
-      { rootMargin: "-35% 0px -50% 0px", threshold: [0.1, 0.25, 0.5] },
+      { rootMargin: "-28% 0px -58% 0px", threshold: [0.1, 0.25, 0.5] },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -46,9 +47,36 @@ export function Header() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    const close = () => setOpen(false);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        close();
+      }
+    };
+    const onResize = () => {
+      if (window.matchMedia("(min-width: 1024px)").matches) {
+        close();
+      }
+    };
+
+    if (!open) {
+      document.documentElement.classList.remove("menu-open");
+      document.body.style.paddingRight = "";
+      return;
+    }
+
+    const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.classList.add("menu-open");
+    document.body.style.paddingRight = scrollbar > 0 ? `${scrollbar}px` : "";
+    closeRef.current?.focus();
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+
     return () => {
-      document.body.style.overflow = "";
+      document.documentElement.classList.remove("menu-open");
+      document.body.style.paddingRight = "";
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
     };
   }, [open]);
 
@@ -59,6 +87,7 @@ export function Header() {
           <Link
             href="#top"
             className="cursor-pointer font-display text-sm tracking-tight text-white sm:text-base"
+            onClick={() => setOpen(false)}
           >
             {site.shortName}
             <span className="sr-only">{site.name}</span>
@@ -70,8 +99,8 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "cursor-pointer rounded-full px-3 py-2 text-sm transition-colors",
-                  active === item.href ? "text-white" : "text-muted hover:text-white",
+                  "cursor-pointer rounded-full px-3 py-2 text-[0.8125rem] tracking-[0.02em] transition-colors duration-500",
+                  active === item.href ? "text-white" : "text-white/72 hover:text-white",
                 )}
                 aria-current={active === item.href ? "location" : undefined}
               >
@@ -87,8 +116,9 @@ export function Header() {
               </GlassButton>
             </div>
             <button
+              ref={closeRef}
               type="button"
-              className="inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-full text-white lg:hidden"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-white lg:hidden"
               aria-expanded={open}
               aria-controls={menuId}
               onClick={() => setOpen((value) => !value)}
@@ -101,33 +131,40 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="pointer-events-auto mx-auto mt-3 max-w-6xl lg:hidden">
-          <LiquidGlass
-            intensity="strong"
-            tone="accent"
-            radius="3xl"
-            padded
-            id={menuId}
-          >
-            <nav aria-label="Мобильная навигация" className="flex flex-col gap-1">
-              {site.nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="cursor-pointer rounded-2xl px-3 py-3 text-lg text-white"
+        <div className="pointer-events-auto lg:hidden">
+          <button
+            type="button"
+            className="mobile-nav-backdrop"
+            aria-label="Закрыть меню"
+            onClick={() => setOpen(false)}
+          />
+          <div className="relative mx-auto mt-3 max-w-6xl px-0">
+            <LiquidGlass intensity="strong" tone="accent" radius="3xl" padded id={menuId}>
+              <nav aria-label="Мобильная навигация" className="flex flex-col gap-1">
+                {site.nav.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-2xl px-3 py-3 text-lg text-white"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+              <div className="mt-4 flex flex-col gap-3">
+                <StatusBadge />
+                <GlassButton
+                  href="#contact"
+                  variant="primary"
+                  magnetic={false}
                   onClick={() => setOpen(false)}
                 >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-            <div className="mt-4 flex flex-col gap-3">
-              <StatusBadge />
-              <GlassButton href="#contact" variant="primary" magnetic={false}>
-                Обсудить проект
-              </GlassButton>
-            </div>
-          </LiquidGlass>
+                  Обсудить проект
+                </GlassButton>
+              </div>
+            </LiquidGlass>
+          </div>
         </div>
       ) : null}
     </header>

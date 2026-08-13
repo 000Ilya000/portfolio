@@ -19,8 +19,6 @@ export function GlassNavigation({ children, className, compact = false }: GlassN
       intensity="strong"
       tone="neutral"
       radius="full"
-      interactive
-      pressable={false}
       className={cn(
         "glass-nav w-full max-w-5xl",
         compact ? "glass-nav--compact" : "glass-nav--regular",

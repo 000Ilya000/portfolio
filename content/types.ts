@@ -33,7 +33,17 @@ export interface SiteConfig {
     width: number;
     height: number;
   };
+  photos: HeroPhoto[];
   nav: NavItem[];
+}
+
+export interface HeroPhoto {
+  id: string;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  objectPosition: string;
 }
 
 export interface HeroContent {
@@ -60,6 +70,7 @@ export interface AboutContent {
   paragraphs: string[];
   principlesTitle: string;
   principles: AboutPrinciple[];
+  highlights: AboutPrinciple[];
 }
 
 export type ExpertiseIcon =
