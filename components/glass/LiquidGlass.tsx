@@ -1,0 +1,76 @@
+import type { CSSProperties, HTMLAttributes, ReactNode } from "react";
+import { cn } from "@/lib/cn";
+
+export type GlassIntensity = "subtle" | "medium" | "strong";
+export type GlassTone = "neutral" | "accent" | "warm";
+export type GlassRadius = "lg" | "xl" | "2xl" | "3xl" | "full";
+
+const intensityClass: Record<GlassIntensity, string> = {
+  subtle: "liquid-glass--subtle",
+  medium: "liquid-glass--medium",
+  strong: "liquid-glass--strong",
+};
+
+const toneClass: Record<GlassTone, string> = {
+  neutral: "liquid-glass--neutral",
+  accent: "liquid-glass--accent",
+  warm: "liquid-glass--warm",
+};
+
+const radiusClass: Record<GlassRadius, string> = {
+  lg: "rounded-[1.15rem]",
+  xl: "rounded-[1.5rem]",
+  "2xl": "rounded-[1.85rem]",
+  "3xl": "rounded-[2.25rem]",
+  full: "rounded-full",
+};
+
+export interface LiquidGlassProps extends HTMLAttributes<HTMLDivElement> {
+  intensity?: GlassIntensity;
+  tone?: GlassTone;
+  radius?: GlassRadius;
+  interactive?: boolean;
+  padded?: boolean;
+  children: ReactNode;
+}
+
+export function LiquidGlass({
+  intensity = "medium",
+  tone = "neutral",
+  radius = "2xl",
+  interactive = false,
+  padded = false,
+  className,
+  children,
+  style,
+  ...props
+}: LiquidGlassProps) {
+  return (
+    <div
+      className={cn(
+        "liquid-glass",
+        intensityClass[intensity],
+        toneClass[tone],
+        radiusClass[radius],
+        interactive && "liquid-glass--interactive",
+        padded && "liquid-glass--padded",
+        className,
+      )}
+      style={
+        {
+          "--glow-x": "50%",
+          "--glow-y": "0%",
+          ...style,
+        } as CSSProperties
+      }
+      {...props}
+    >
+      <span className="liquid-glass__filter" aria-hidden="true" />
+      <span className="liquid-glass__refract" aria-hidden="true" />
+      <span className="liquid-glass__tint" aria-hidden="true" />
+      <span className="liquid-glass__specular" aria-hidden="true" />
+      <span className="liquid-glass__edge" aria-hidden="true" />
+      <div className="liquid-glass__content">{children}</div>
+    </div>
+  );
+}
