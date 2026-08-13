@@ -195,7 +195,6 @@ export function StackMap() {
 
         <div className={cn("stack-map__hub", active === "react" && "is-active")}>
           <button
-            ref={hubRef}
             type="button"
             className="stack-map__hub-hit"
             onMouseEnter={() => setActive("react")}
