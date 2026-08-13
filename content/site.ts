@@ -29,9 +29,9 @@ export const site: SiteConfig = {
   },
   portrait: {
     src: `${basePath}/images/portrait.png`,
-    alt: "Визуальная заглушка портрета. Замените файл public/images/portrait.png на фотографию.",
-    width: 960,
-    height: 960,
+    alt: "Курымшин Илья, Senior React / Frontend Developer",
+    width: 336,
+    height: 336,
   },
   nav: [
     { href: "#about", label: "Обо мне" },

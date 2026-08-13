@@ -33,7 +33,7 @@ export function CopyButton({
       <button
         type="button"
         className={cn(
-          "inline-flex min-h-11 items-center rounded-full px-3 text-sm text-muted transition-colors hover:text-white",
+          "inline-flex min-h-11 cursor-pointer items-center rounded-full px-3 text-sm text-muted transition-colors hover:text-white",
           className,
         )}
         onClick={async () => {

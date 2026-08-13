@@ -37,7 +37,7 @@ npm run typecheck
 - **Проекты:** `content/projects.ts`
 - **Процесс:** `content/process.ts`
 - **Стек:** `content/stack.ts`
-- **Контакты (Telegram, email, GitHub, LinkedIn):** `content/contacts.ts`
+- **Контакты (Telegram, телефон, email, GitHub):** `content/contacts.ts`
 - **Базовый URL сайта:** переменная `NEXT_PUBLIC_SITE_URL` или поле `url` в `content/site.ts`
 
 ## Дизайн-токены

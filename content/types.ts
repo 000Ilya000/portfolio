@@ -6,7 +6,7 @@ export interface NavItem {
 }
 
 export interface SocialLink {
-  id: "telegram" | "email" | "github" | "linkedin";
+  id: "telegram" | "email" | "github" | "phone";
   label: string;
   href: string;
   value: string;

@@ -22,7 +22,7 @@ export function Footer() {
                 <div key={link.id} className="flex items-center gap-2">
                   <a
                     href={link.href}
-                    className="text-white hover:text-accent"
+                    className="cursor-pointer text-white hover:text-accent"
                     {...(link.href.startsWith("http")
                       ? { target: "_blank", rel: "noreferrer noopener" }
                       : {})}

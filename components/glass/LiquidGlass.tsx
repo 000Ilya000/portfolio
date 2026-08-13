@@ -29,7 +29,10 @@ export interface LiquidGlassProps extends HTMLAttributes<HTMLDivElement> {
   intensity?: GlassIntensity;
   tone?: GlassTone;
   radius?: GlassRadius;
+  /** Follows the pointer with a specular highlight. Does not make the surface a button. */
   interactive?: boolean;
+  /** Hover lift, active press and pointer cursor. Use only on real controls. */
+  pressable?: boolean;
   padded?: boolean;
   children: ReactNode;
 }
@@ -39,6 +42,7 @@ export function LiquidGlass({
   tone = "neutral",
   radius = "2xl",
   interactive = false,
+  pressable = false,
   padded = false,
   className,
   children,
@@ -53,18 +57,20 @@ export function LiquidGlass({
         toneClass[tone],
         radiusClass[radius],
         interactive && "liquid-glass--interactive",
+        pressable && "liquid-glass--pressable",
         padded && "liquid-glass--padded",
         className,
       )}
       style={
         {
           "--glow-x": "50%",
-          "--glow-y": "0%",
+          "--glow-y": "8%",
           ...style,
         } as CSSProperties
       }
       {...props}
     >
+      <span className="liquid-glass__fill" aria-hidden="true" />
       <span className="liquid-glass__filter" aria-hidden="true" />
       <span className="liquid-glass__refract" aria-hidden="true" />
       <span className="liquid-glass__tint" aria-hidden="true" />

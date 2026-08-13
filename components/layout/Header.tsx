@@ -6,7 +6,6 @@ import { Menu, X } from "lucide-react";
 import { GlassButton } from "@/components/glass/GlassButton";
 import { GlassNavigation } from "@/components/glass/GlassNavigation";
 import { LiquidGlass } from "@/components/glass/LiquidGlass";
-import { usePointerGlow } from "@/components/glass/usePointerGlow";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
@@ -16,7 +15,6 @@ export function Header() {
   const [compact, setCompact] = useState(false);
   const [active, setActive] = useState("");
   const menuId = useId();
-  const glow = usePointerGlow();
 
   useEffect(() => {
     const onScroll = () => setCompact(window.scrollY > 24);
@@ -60,7 +58,7 @@ export function Header() {
         <GlassNavigation compact={compact}>
           <Link
             href="#top"
-            className="font-display text-sm tracking-tight text-white sm:text-base"
+            className="cursor-pointer font-display text-sm tracking-tight text-white sm:text-base"
           >
             {site.shortName}
             <span className="sr-only">{site.name}</span>
@@ -72,7 +70,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "rounded-full px-3 py-2 text-sm transition-colors",
+                  "cursor-pointer rounded-full px-3 py-2 text-sm transition-colors",
                   active === item.href ? "text-white" : "text-muted hover:text-white",
                 )}
                 aria-current={active === item.href ? "location" : undefined}
@@ -90,7 +88,7 @@ export function Header() {
             </div>
             <button
               type="button"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-white lg:hidden"
+              className="inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-full text-white lg:hidden"
               aria-expanded={open}
               aria-controls={menuId}
               onClick={() => setOpen((value) => !value)}
@@ -108,17 +106,15 @@ export function Header() {
             intensity="strong"
             tone="accent"
             radius="3xl"
-            interactive
             padded
             id={menuId}
-            {...glow}
           >
             <nav aria-label="Мобильная навигация" className="flex flex-col gap-1">
               {site.nav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="rounded-2xl px-3 py-3 text-lg text-white"
+                  className="cursor-pointer rounded-2xl px-3 py-3 text-lg text-white"
                   onClick={() => setOpen(false)}
                 >
                   {item.label}

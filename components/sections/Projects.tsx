@@ -80,7 +80,7 @@ function ProjectCard({ project, featured }: { project: Project; featured: boolea
           <button
             type="button"
             className={cn(
-              "min-h-11 rounded-full px-4 text-sm text-white",
+              "min-h-11 cursor-pointer rounded-full px-4 text-sm text-white",
               "border border-white/10 hover:border-accent/40",
             )}
             aria-expanded={open}

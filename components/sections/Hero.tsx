@@ -70,6 +70,7 @@ export function Hero() {
               tone="warm"
               radius="3xl"
               interactive
+              pressable={false}
               className="p-2"
               {...glow}
             >
@@ -84,18 +85,15 @@ export function Hero() {
 }
 
 function HeroSculpture() {
-  const glowA = usePointerGlow();
-  const glowB = usePointerGlow();
-
   return (
     <>
       <LiquidGlass
         intensity="medium"
         tone="accent"
         radius="2xl"
-        interactive
-        className="absolute -left-4 top-8 hidden w-40 sm:block lg:-left-16"
-        {...glowA}
+        interactive={false}
+        pressable={false}
+        className="pointer-events-none absolute -left-4 top-8 hidden w-40 sm:block lg:-left-16"
       >
         <div className="px-4 py-3">
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">Focus</p>
@@ -106,9 +104,9 @@ function HeroSculpture() {
         intensity="medium"
         tone="neutral"
         radius="2xl"
-        interactive
-        className="absolute -bottom-6 right-2 w-[min(100%,14rem)] sm:-right-4"
-        {...glowB}
+        interactive={false}
+        pressable={false}
+        className="pointer-events-none absolute -bottom-6 right-2 w-[min(100%,14rem)] sm:-right-4"
       >
         <div className="flex flex-wrap gap-2 px-3 py-3">
           {hero.chips.slice(0, 3).map((chip) => (
