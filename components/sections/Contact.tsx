@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUpRight, FolderGit2, Mail, Phone, Send } from "lucide-react";
 import { GlassButton } from "@/components/glass/GlassButton";
 import { GlassCard } from "@/components/glass/GlassCard";
@@ -6,8 +8,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StatusBadge } from "@/components/ui/StatusBadge";
-import { contact } from "@/content/contacts";
 import { type SocialLink } from "@/content/types";
+import { contact } from "@/content/contacts";
 
 const icons = {
   telegram: Send,
@@ -33,7 +35,7 @@ export function Contact() {
                 <p className="mt-5 text-base leading-7 text-mist sm:text-lg sm:leading-8">{contact.nextStep}</p>
               </div>
               {telegram ? (
-                <GlassButton href={telegram.href} variant="primary" intensity="strong" magnetic={false}>
+                <GlassButton href={telegram.href} variant="primary" intensity="strong">
                   {contact.cta}
                   <ArrowUpRight size={18} aria-hidden="true" />
                 </GlassButton>

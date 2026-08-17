@@ -14,12 +14,14 @@ interface CopyButtonProps {
 
 export function CopyButton({
   value,
-  label = contact.copyLabel,
-  copiedLabel = contact.copiedLabel,
+  label,
+  copiedLabel,
   className,
 }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
   const liveId = useId();
+  const resolvedLabel = label ?? contact.copyLabel;
+  const resolvedCopied = copiedLabel ?? contact.copiedLabel;
 
   useEffect(() => {
     if (!copied) {
@@ -45,14 +47,14 @@ export function CopyButton({
             setCopied(false);
           }
         }}
-        aria-label={copied ? copiedLabel : label}
+        aria-label={copied ? resolvedCopied : resolvedLabel}
         aria-describedby={liveId}
       >
         <Copy size={16} className="sm:hidden" aria-hidden="true" />
-        <span className="hidden sm:inline">{copied ? copiedLabel : label}</span>
+        <span className="hidden sm:inline">{copied ? resolvedCopied : resolvedLabel}</span>
       </button>
       <span id={liveId} className="sr-only" aria-live="polite">
-        {copied ? `${copiedLabel}: ${value}` : ""}
+        {copied ? `${resolvedCopied}: ${value}` : ""}
       </span>
     </>
   );

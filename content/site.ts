@@ -8,7 +8,7 @@ export const site: SiteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://000ilya000.github.io/portfolio",
   locale: "ru_RU",
   language: "ru",
-  title: "Курымшин Илья — Senior React / Frontend Developer",
+  title: "Курымшин Илья - Senior React / Frontend Developer",
   description:
     "Senior React / Frontend Developer. Проектирую и разрабатываю интерфейсы сложных B2C- и B2B-продуктов: быстро, удобно и масштабируемо. Открыт к интересным проектам и предложениям.",
   keywords: [
@@ -83,7 +83,7 @@ export const hero: HeroContent = {
   lastName: "Курымшин",
   offer: "Интерфейсы, в которых сложная логика ощущается простой.",
   value:
-    "Проектирую и собираю frontend для B2C- и B2B-продуктов: от сервисов для людей до внутренних систем с ролями, документами и тяжёлыми процессами. Соединяю инженерную точность с вниманием к UX — чтобы продуктом было удобно пользоваться и легко развивать.",
+    "Проектирую и собираю frontend для B2C- и B2B-продуктов: от сервисов для людей до внутренних систем с ролями, документами и тяжёлыми процессами. Соединяю инженерную точность с вниманием к UX, чтобы продуктом было удобно пользоваться и легко развивать.",
   primaryCta: { label: "Обсудить проект", href: "#contact" },
   secondaryCta: { label: "Посмотреть проекты", href: "#projects" },
   chips: ["React", "Next.js", "TypeScript", "B2C / B2B", "Design-minded"],

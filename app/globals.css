@@ -578,6 +578,16 @@ button.icon-live-host svg {
   .glass-footer .liquid-glass__content {
     padding: 2rem 2.2rem;
   }
+
+  .project-card__banner {
+    height: 17rem;
+    margin: -1.5rem -1.5rem 1.4rem;
+  }
+
+  .project-card__body--phone {
+    grid-template-columns: minmax(0, 1fr) 11rem;
+    gap: 1rem 1.5rem;
+  }
 }
 
 .status-dot {
@@ -606,6 +616,11 @@ button.icon-live-host svg {
   letter-spacing: -0.06em;
   line-height: 0.88;
   text-wrap: balance;
+}
+
+.section-heading__title {
+  line-height: 1.05;
+  text-wrap: pretty;
 }
 
 .section-kicker {
@@ -659,6 +674,8 @@ button.icon-live-host svg {
   position: relative;
   z-index: 2;
   max-width: 38rem;
+  min-width: 0;
+  overflow: visible;
 }
 
 .hero__title {
@@ -852,6 +869,200 @@ button.icon-live-host svg {
 .process-bento__item {
   display: flex;
   flex-direction: column;
+}
+
+.process-flow {
+  position: relative;
+  margin-top: 2.4rem;
+  padding-top: 2.6rem;
+}
+
+.process-flow__svg {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.process-flow__track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.process-flow__draw {
+  fill: none;
+  stroke: #3eefc8;
+  stroke-width: 2.35;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px rgba(62, 239, 200, 0.42));
+}
+
+.process-flow__head {
+  fill: #3eefc8;
+  filter: drop-shadow(0 0 8px rgba(62, 239, 200, 0.55));
+}
+
+.process-flow__mark-halo {
+  fill: rgba(62, 239, 200, 0.1);
+}
+
+.process-flow__mark-ring {
+  fill: rgba(8, 12, 18, 0.55);
+  stroke: #3eefc8;
+  stroke-width: 1.7;
+}
+
+.process-flow__mark-core {
+  fill: #3eefc8;
+}
+
+.process-flow__finish-ring {
+  fill: none;
+  stroke: #3eefc8;
+}
+
+.process-flow__finish-ring--outer {
+  stroke-width: 1.35;
+  stroke-dasharray: 3.4 2.6;
+  opacity: 0.88;
+}
+
+.process-flow__finish-ring--mid {
+  stroke-width: 1.55;
+}
+
+.process-flow__finish-flag {
+  fill: #3eefc8;
+}
+
+.process-flow__finish-pole {
+  fill: none;
+  stroke: #3eefc8;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+}
+
+.process-flow__list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0 0 0 1.35rem;
+  list-style: none;
+}
+
+.process-flow__item {
+  position: relative;
+  width: 100%;
+}
+
+.process-flow__ghost {
+  display: none;
+}
+
+.project-card__banner {
+  overflow: hidden;
+  height: 12.5rem;
+  margin: -1rem -1rem 1.2rem;
+  border-radius: 2.25rem 2.25rem 1.1rem 1.1rem;
+}
+
+.project-card__banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.project-card__body--phone {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(7.25rem, 9.5rem);
+  gap: 0.85rem 1rem;
+  align-items: start;
+}
+
+.project-card__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  grid-column: 1;
+}
+
+.project-card__toggle {
+  align-self: flex-start;
+  margin-top: 1.25rem;
+}
+
+.project-card__phone {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  width: 100%;
+  margin: 0;
+  padding: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.7rem;
+  background: rgba(8, 10, 16, 0.7);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+}
+
+.project-card__phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1.4rem;
+}
+
+@media (min-width: 900px) {
+  .process-flow__list {
+    gap: 1.15rem;
+    padding-left: 0;
+  }
+
+  .process-flow__item {
+    width: min(38rem, 66%);
+  }
+
+  .process-flow__item--left {
+    align-self: flex-start;
+  }
+
+  .process-flow__item--right {
+    align-self: flex-end;
+  }
+
+  .process-flow__ghost {
+    display: block;
+    position: absolute;
+    top: 50%;
+    z-index: 0;
+    font-family: var(--font-display);
+    font-size: clamp(4.5rem, 9vw, 8.5rem);
+    font-weight: 600;
+    letter-spacing: -0.08em;
+    line-height: 0.8;
+    color: rgba(255, 255, 255, 0.045);
+    pointer-events: none;
+    transform: translateY(-50%);
+  }
+
+  .process-flow__item--left .process-flow__ghost {
+    left: calc(100% + 1.25rem);
+  }
+
+  .process-flow__item--right .process-flow__ghost {
+    right: calc(100% + 1.25rem);
+  }
+
+  .process-flow__item:last-child .process-flow__ghost {
+    display: none;
+  }
 }
 
 @media (min-width: 640px) {
@@ -1324,8 +1535,12 @@ button.icon-live-host svg {
   .stack-map__pulse,
   .stack-map__hub-ring,
   .stack-map__hub-logo,
-  .stack-map__tip {
+  .stack-map__tip,
+  .process-flow__draw,
+  .process-flow__head,
+  .process-flow__arrow {
     animation: none;
+    transition: none;
   }
 }
 

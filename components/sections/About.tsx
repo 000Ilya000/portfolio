@@ -1,3 +1,5 @@
+"use client";
+
 import { GlassCard } from "@/components/glass/GlassCard";
 import { Section } from "@/components/layout/Section";
 import { FloatOnScroll } from "@/components/motion/FloatOnScroll";
@@ -5,9 +7,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { about } from "@/content/about";
 
-const mosaic = [...about.principles, ...about.highlights];
-
 export function About() {
+  const mosaic = [...about.principles, ...about.highlights];
   return (
     <Section id="about">
       <Reveal>

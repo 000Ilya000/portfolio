@@ -105,6 +105,15 @@ export interface ExpertiseContent {
 
 export type ProjectKind = "b2c" | "b2b";
 
+export interface ProjectImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  fit: "wide" | "phone";
+  objectPosition?: string;
+}
+
 export interface Project {
   id: string;
   kind: ProjectKind;
@@ -118,6 +127,7 @@ export interface Project {
   engineering: string;
   value: string;
   tags: string[];
+  image?: ProjectImage;
 }
 
 export interface ProjectsContent {
@@ -205,3 +215,4 @@ export interface ContactContent {
   copyLabel: string;
   links: SocialLink[];
 }
+

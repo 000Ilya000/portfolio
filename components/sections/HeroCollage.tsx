@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from "framer-motion";
-import { site } from "@/content/site";
 import { type HeroPhoto } from "@/content/types";
 import { cn } from "@/lib/cn";
 import { useMediaQuery } from "@/lib/media";
+import { site } from "@/content/site";
 
 const speeds = [-72, 58, -64, 70] as const;
 

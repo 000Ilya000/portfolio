@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
-import { stack } from "@/content/stack";
 import { type StackLogoId, type StackNode } from "@/content/types";
 import { cn } from "@/lib/cn";
 import { StackLogo } from "@/components/sections/stack-logos";
+import { stack } from "@/content/stack";
 
 interface Trace {
   id: StackLogoId;
@@ -119,7 +119,7 @@ export function StackMap() {
     });
 
     setTraces(next);
-  }, []);
+  }, [stack.nodes]);
 
   useEffect(() => {
     const query = window.matchMedia("(min-width: 1024px) and (hover: hover)");

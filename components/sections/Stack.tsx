@@ -1,3 +1,5 @@
+"use client";
+
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { StackMap } from "@/components/sections/StackMap";

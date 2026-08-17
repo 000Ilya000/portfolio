@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { GlassCard } from "@/components/glass/GlassCard";
 import { Section } from "@/components/layout/Section";
@@ -8,6 +9,18 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { projects } from "@/content/projects";
 import { type Project } from "@/content/types";
 import { cn } from "@/lib/cn";
+
+const caseLabels = {
+  expand: "Развернуть кейс",
+  collapse: "Свернуть кейс",
+  context: "Контекст",
+  problem: "Проблема",
+  role: "Роль",
+  solution: "Техническое решение",
+  ux: "UI/UX",
+  engineering: "Инженерная сложность",
+  value: "Ценность",
+} as const;
 
 export function Projects() {
   return (
@@ -35,7 +48,7 @@ export function Projects() {
                   <p className="max-w-xl text-sm leading-6 text-muted">{group.description}</p>
                 </div>
               </Reveal>
-              <div className="grid gap-4">
+              <div className="grid gap-5">
                 {items.map((item) => (
                   <ProjectCard key={item.id} project={item} />
                 ))}
@@ -50,12 +63,38 @@ export function Projects() {
 
 function ProjectCard({ project }: { project: Project }) {
   const [open, setOpen] = useState(false);
+  const image = project.image;
 
   return (
-    <GlassCard intensity="medium" tone={project.kind === "b2b" ? "accent" : "warm"}>
+    <GlassCard
+      intensity="medium"
+      tone={project.kind === "b2b" ? "accent" : "warm"}
+      className="project-card"
+    >
       <article>
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-          <div className="max-w-2xl">
+        {image?.fit === "wide" ? (
+          <div className="project-card__banner">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              style={{ objectPosition: image.objectPosition ?? "center 18%" }}
+            />
+          </div>
+        ) : null}
+        <div className={cn("project-card__body", image?.fit === "phone" && "project-card__body--phone")}>
+          {image?.fit === "phone" ? (
+            <div className="project-card__phone">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+              />
+            </div>
+          ) : null}
+          <div className="project-card__copy">
             <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
               {project.kind.toUpperCase()}
             </p>
@@ -73,32 +112,32 @@ function ProjectCard({ project }: { project: Project }) {
                 </li>
               ))}
             </ul>
-          </div>
-          <button
-            type="button"
-            className={cn(
-              "min-h-11 cursor-pointer rounded-full px-4 text-sm text-white",
-              "border border-white/10 hover:border-accent/40",
+            {open ? (
+              <dl className="mt-8 grid gap-5 border-t border-white/10 pt-6 md:grid-cols-2">
+                <CaseField label={caseLabels.context} value={project.context} />
+                <CaseField label={caseLabels.problem} value={project.problem} />
+                <CaseField label={caseLabels.role} value={project.role} />
+                <CaseField label={caseLabels.solution} value={project.solution} />
+                <CaseField label={caseLabels.ux} value={project.ux} />
+                <CaseField label={caseLabels.engineering} value={project.engineering} />
+                <CaseField label={caseLabels.value} value={project.value} className="md:col-span-2" />
+              </dl>
+            ) : (
+              <p className="mt-6 text-sm leading-6 text-mist">{project.context}</p>
             )}
-            aria-expanded={open}
-            onClick={() => setOpen((value) => !value)}
-          >
-            {open ? "Свернуть кейс" : "Развернуть кейс"}
-          </button>
+            <button
+              type="button"
+              className={cn(
+                "project-card__toggle min-h-11 shrink-0 cursor-pointer rounded-full px-4 text-sm text-white",
+                "border border-white/10 hover:border-accent/40",
+              )}
+              aria-expanded={open}
+              onClick={() => setOpen((value) => !value)}
+            >
+              {open ? caseLabels.collapse : caseLabels.expand}
+            </button>
+          </div>
         </div>
-        {open ? (
-          <dl className="mt-8 grid gap-5 border-t border-white/10 pt-6 md:grid-cols-2">
-            <CaseField label="Контекст" value={project.context} />
-            <CaseField label="Проблема" value={project.problem} />
-            <CaseField label="Роль" value={project.role} />
-            <CaseField label="Техническое решение" value={project.solution} />
-            <CaseField label="UI/UX" value={project.ux} />
-            <CaseField label="Инженерная сложность" value={project.engineering} />
-            <CaseField label="Ценность" value={project.value} className="md:col-span-2" />
-          </dl>
-        ) : (
-          <p className="mt-6 max-w-3xl text-sm leading-6 text-mist">{project.context}</p>
-        )}
       </article>
     </GlassCard>
   );

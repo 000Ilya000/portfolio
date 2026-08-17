@@ -1,3 +1,5 @@
+"use client";
+
 import { GlassCard } from "@/components/glass/GlassCard";
 import { Section } from "@/components/layout/Section";
 import { FloatOnScroll } from "@/components/motion/FloatOnScroll";

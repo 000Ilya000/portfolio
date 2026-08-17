@@ -44,7 +44,7 @@ export function Header() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, []);
+  }, [site.nav]);
 
   useEffect(() => {
     const close = () => setOpen(false);
@@ -99,7 +99,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "cursor-pointer rounded-full px-3 py-2 text-[0.8125rem] tracking-[0.02em] transition-colors duration-500",
+                  "cursor-pointer rounded-full px-2.5 py-2 text-[0.8125rem] tracking-[0.02em] transition-colors duration-500 xl:px-3",
                   active === item.href ? "text-white" : "text-white/72 hover:text-white",
                 )}
                 aria-current={active === item.href ? "location" : undefined}
