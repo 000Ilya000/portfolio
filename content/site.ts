@@ -8,9 +8,9 @@ export const site: SiteConfig = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://000ilya000.github.io/portfolio",
   locale: "ru_RU",
   language: "ru",
-  title: "Курымшин Илья - Senior React / Frontend Developer",
+  title: "Курымшин Илья · Senior React / Frontend Developer",
   description:
-    "Senior React / Frontend Developer. Проектирую и разрабатываю интерфейсы сложных B2C- и B2B-продуктов: быстро, удобно и масштабируемо. Открыт к интересным проектам и предложениям.",
+    "Собираю интерфейсы сложных B2C- и B2B-продуктов на React и TypeScript. Кабинеты, документы, процессы. Открыт к проектам.",
   keywords: [
     "frontend",
     "React",

@@ -6,6 +6,7 @@ import { SkipLink } from "@/components/layout/SkipLink";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { site } from "@/content/site";
 import { contact } from "@/content/contacts";
+import { publicUrl } from "@/lib/assets";
 import "./globals.css";
 
 const display = Unbounded({
@@ -35,17 +36,26 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  applicationName: site.name,
   keywords: site.keywords,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
-  alternates: { canonical: "/" },
+  publisher: site.name,
+  category: "technology",
+  referrer: "origin-when-cross-origin",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: { canonical: site.url },
   openGraph: {
     type: "website",
     locale: site.locale,
     url: site.url,
+    siteName: site.name,
     title: site.title,
     description: site.description,
-    siteName: site.name,
   },
   twitter: {
     card: "summary_large_image",
@@ -55,6 +65,10 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
   },
 };
 
@@ -65,18 +79,38 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const portraitUrl = publicUrl("/images/hero/closeup.jpg");
+
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.name,
-  jobTitle: site.role,
-  url: site.url,
-  email: contact.links.find((link) => link.id === "email")?.copyValue,
-  telephone: contact.links.find((link) => link.id === "phone")?.copyValue,
-  knowsAbout: ["React", "Next.js", "TypeScript", "Frontend architecture", "UI/UX"],
-  sameAs: contact.links
-    .filter((link) => link.href.startsWith("http"))
-    .map((link) => link.href),
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.name,
+      givenName: "Илья",
+      familyName: "Курымшин",
+      jobTitle: site.role,
+      description: site.description,
+      url: site.url,
+      image: portraitUrl,
+      email: contact.links.find((link) => link.id === "email")?.href,
+      telephone: contact.links.find((link) => link.id === "phone")?.copyValue,
+      knowsAbout: ["React", "Next.js", "TypeScript", "Frontend architecture", "UI/UX"],
+      sameAs: contact.links
+        .filter((link) => link.href.startsWith("http"))
+        .map((link) => link.href),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      name: site.name,
+      url: site.url,
+      description: site.description,
+      inLanguage: site.language,
+      publisher: { "@id": `${site.url}/#person` },
+    },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
