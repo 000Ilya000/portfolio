@@ -59,7 +59,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og.jpg",
-        secureUrl: "/og.jpg",
         width: 1200,
         height: 630,
         alt: `${site.name}, ${site.role}`,
